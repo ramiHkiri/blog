@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,18 +13,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
-
+//home page
 Route::get('/', function () {
-    return view('posts');
-});
-
-Route::get('posts/{post}', function ($slug) {
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
-    if(! file_exists($path)){
-        return redirect('/');
-    }
-    $post = file_get_contents($path);
-    return view('post', [
-        'post' => $post,
+    return view('posts', [
+        'posts'=>Post::all()
     ]);
 });
+// route to selected post
+Route::get('posts/{post}', function ($slug) { 
+    return view('post',[
+        'post' => Post::find($slug)
+    ]);
+})->where('post', '[A-z_\-]+'); //wildcard constraints

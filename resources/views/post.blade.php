@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<title>My blog</title>
-<link rel="stylesheet" href="/app.css">
-
-<body>
-
+@extends('layout')
+@section('content')
     <article>
-        <h1>  {{$post->title}} </h1>
+        <h1> {{ $post->title }} </h1>
         <div>
-            {!!$post->body!!}
+            {!! $post->body !!}
         </div>
 
     </article>
     <a href="/">Home page</a>
-</body> 
-
-</html>
+@endsection

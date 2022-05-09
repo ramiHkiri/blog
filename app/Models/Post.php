@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    //every thing is fillable except propreties in garded table
+    protected $guarded=['id'];
+
+    //only propreties in the table can be fillable
+    //protected $fillable=['title'];
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
 }
